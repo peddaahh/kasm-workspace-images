@@ -53,4 +53,4 @@ jobs:
           file: ${{ matrix.paths }}
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/bySimpson/kasm-workspace-${{ env.IMAGENAME }}:latest
+          tags: ghcr.io/bysimpson/kasm-workspace-${{ env.IMAGENAME }}:latest
