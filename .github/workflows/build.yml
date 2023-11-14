@@ -38,7 +38,8 @@ jobs:
       - name: get image info
         run: |
           echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
-          echo "IMAGENAME=${{ matrix.paths }}" | cut -d"." -f1 | rev  >>${GITHUB_ENV}
+          name="IMAGENAME=${{ matrix.paths }}" | cut -d"." -f1 | rev
+          echo $name >>${GITHUB_ENV}
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
