@@ -32,9 +32,10 @@ jobs:
         paths: ${{ fromJson(needs.list-files.outputs.paths) }}
     runs-on: ubuntu-latest
     steps:
-      - name: Build
-        run: |
-          echo ${{ matrix.paths }}
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: get image info
         run: |
           echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
