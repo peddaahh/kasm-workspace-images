@@ -34,7 +34,7 @@ jobs:
           fetch-depth: 0
       - name: get image info
         run: |
-          echo "OWNER=${{ github.repository_owner }}" | tr '[A-Z]' '[a-z]' >>${GITHUB_ENV}
+          echo "OWNER=${github.repository_owner,,}" | tr '[A-Z]' '[a-z]' >>${GITHUB_ENV}
           echo "IMAGENAME=./ubuntu-focal-desktop.Dockerfile" | sed 's/\.\///g' | sed 's/\.[^.]*$//' >>${GITHUB_ENV}
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
