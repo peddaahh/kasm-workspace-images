@@ -51,6 +51,6 @@ jobs:
         with:
           context: .
           file: ${{ matrix.paths }}
-          platforms: linux/amd64,linux/arm64,linux/arm
+          platforms: linux/amd64,linux/arm64
           push: true
           tags: ghcr.io/kasm-workspace-${{ env.IMAGENAME }}:latest
