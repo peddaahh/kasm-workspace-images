@@ -7,4 +7,4 @@ RUN echo "#1000 ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 USER 1000
 # install ZSH
 RUN sh -c "$(curl -fsSL https://thmr.at/setup/zsh)"
-RUN sudo usermod -s $(which zsh) kasm-user
+RUN sudo usermod -s /bin/zsh kasm-user
