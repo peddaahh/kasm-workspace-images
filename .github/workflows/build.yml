@@ -35,7 +35,7 @@ jobs:
       - name: get image info
         run: |
           echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
-          echo echo "IMAGENAME=./ubuntu-focal-desktop.Dockerfile" | sed 's/\.\///g' | sed 's/\.[^.]*$//' >>${GITHUB_ENV}
+          echo "IMAGENAME=./ubuntu-focal-desktop.Dockerfile" | sed 's/\.\///g' | sed 's/\.[^.]*$//' >>${GITHUB_ENV}
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
