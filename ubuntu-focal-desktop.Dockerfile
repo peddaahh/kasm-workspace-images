@@ -1,4 +1,4 @@
-FROM kasmweb/ubuntu-jammy-desktop:1.14.0-rolling
+FROM docker.io/kasmweb/ubuntu-jammy-desktop:1.14.0-rolling
 
 USER root
 RUN apt update && apt install sudo
