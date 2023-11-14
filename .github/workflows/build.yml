@@ -32,21 +32,25 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: get image info
-        run: |
-          echo "OWNER=${github.repository_owner,,}" | tr '[A-Z]' '[a-z]' >>${GITHUB_ENV}
-          echo "IMAGENAME=./ubuntu-focal-desktop.Dockerfile" | sed 's/\.\///g' | sed 's/\.[^.]*$//' >>${GITHUB_ENV}
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
+      - name: Build image
+        run: |
+          IMAGE_NAME=${{ matrix.paths }} | sed 's/\.\///g' | sed 's/\.[^.]*$//'
+          docker build . --file Dockerfile --tag ${{ matrix.paths }} --label "runnumber=${GITHUB_RUN_ID}"
       - name: Log in to registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
-      - name: Build and push
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          file: ${{ matrix.paths }}
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: ghcr.io/${{ env.OWNER }}/kasm-workspace-${{ env.IMAGENAME }}:latest
+      - name: Push image
+        run: |
+          IMAGE_NAME=${{ matrix.paths }} | sed 's/\.\///g' | sed 's/\.[^.]*$//'
+          IMAGE_ID=ghcr.io/${{ github.repository_owner }}/${{ matrix.paths }}
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+          [ "$VERSION" == "main" ] && VERSION=latest
+          echo IMAGE_ID=$IMAGE_ID
+          echo VERSION=$VERSION
+          docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
+          docker push $IMAGE_ID:$VERSION
