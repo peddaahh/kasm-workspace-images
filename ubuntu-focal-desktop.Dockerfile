@@ -1,7 +1,7 @@
 FROM docker.io/kasmweb/ubuntu-jammy-desktop:%VER%-rolling
 
 USER root
-RUN apt update && apt install -y sudo curl jq wget build-essential python3 python3-pip
+RUN apt update && apt install -y sudo curl jq wget build-essential python3 python3-pip wireguard
 RUN echo "#1000 ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # https://hub.docker.com/r/rustlang/rust/dockerfile
