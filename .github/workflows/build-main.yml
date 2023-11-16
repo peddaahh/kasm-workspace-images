@@ -29,6 +29,8 @@ jobs:
         paths: ${{ fromJson(needs.list-files.outputs.paths) }}
     runs-on: ubuntu-latest
     steps:
+      - name: Print
+        run: env | sort
       - name: Checkout
         uses: actions/checkout@v4
         with:
