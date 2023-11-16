@@ -36,6 +36,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: get image info
+        run: |
           echo "IMAGENAME=${{ matrix.paths }}" | sed 's/\.\///g' | sed 's/\.[^.]*$//' >>${GITHUB_ENV}
           echo "OWNER=${{ github.repository_owner }}" | sed -e 's/\(.*\)/\L\1/' >>${GITHUB_ENV}
           sed -i "s/%VER%/${{ matrix.version }}/" ${{ matrix.paths }}
