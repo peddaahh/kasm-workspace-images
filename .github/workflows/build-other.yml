@@ -38,6 +38,7 @@ jobs:
       - name: get image info
         run: |
           echo "IMAGENAME=${{ matrix.paths }}" | sed 's/\.\///g' | sed 's/\.[^.]*$//' >>${GITHUB_ENV}
+          echo "OWNER=${{ github.repository_owner }}" | sed -e 's/\(.*\)/\L\1/' >>${GITHUB_ENV}
           sed -i "s/%VER%/${{ matrix.version }}/" ${{ matrix.paths }}
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -52,4 +53,4 @@ jobs:
           file: ${{ matrix.paths }}
           platforms: linux/amd64,linux/arm64
           push: false
-          tags: ghcr.io/bysimpson/kasm-workspace-${{ env.IMAGENAME }}:${{ matrix.version }}-${{github.event.number}}
+          tags: ghcr.io/${{ env.owner }}/kasm-workspace-${{ env.IMAGENAME }}:${{ matrix.version }}-${{github.event.number}}
