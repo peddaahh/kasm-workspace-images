@@ -1,7 +1,7 @@
 FROM docker.io/kasmweb/ubuntu-jammy-desktop:%VER%-rolling
 
 USER root
-RUN apt update && curl https://raw.githubusercontent.com/apache/flink/02d30ace69dc18555a5085eccf70ee884e73a16e/tools/azure-pipelines/free_disk_space.sh | bash && apt install -y sudo curl jq wget build-essential python3 python3-pip wireguard openresolv libfuse2 libxi6 libxrender1 libxtst6 mesa-utils libfontconfig libgtk-3-bin php8.1 php8.1-cli php8.1-common php8.1-mysql php8.1-zip php8.1-gd php8.1-mbstring php8.1-curl php8.1-xml php8.1-bcmath php8.1-sqlite
+RUN apt update && curl https://raw.githubusercontent.com/apache/flink/02d30ace69dc18555a5085eccf70ee884e73a16e/tools/azure-pipelines/free_disk_space.sh | bash && apt install -y sudo curl jq wget build-essential python3 python3-pip wireguard openresolv libfuse2 libxi6 libxrender1 libxtst6 mesa-utils libfontconfig libgtk-3-bin php8.1 php8.1-cli php8.1-common php8.1-mysql php8.1-zip php8.1-gd php8.1-mbstring php8.1-curl php8.1-xml php8.1-bcmath php8.1-sqlite3
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 RUN echo "#1000 ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 
