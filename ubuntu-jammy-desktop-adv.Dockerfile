@@ -2,6 +2,10 @@ FROM ghcr.io/peddaahh/kasm-workspace-ubuntu-jammy-desktop:%VER%
 
 USER root
 RUN mkdir -p /home/kasm-user/Desktop
+RUN echo 'kernel.unprivileged_userns_clone=1' > /etc/sysctl.d/00-local-userns.conf
+RUN service procps restart
+RUN sudo chown root /opt/PhpStorm-232.10072.32/jbr/lib/chrome-sandbox
+RUN sudo chmod 4755 /opt/PhpStorm-232.10072.32/jbr/lib/chrome-sandbox
 
 RUN wget https://downloads.1password.com/linux/debian/amd64/stable/1password-latest.deb
 RUN sudo apt install ./1password-latest.deb -y
