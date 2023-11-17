@@ -1,6 +1,7 @@
 FROM ghcr.io/peddaahh/kasm-workspace-ubuntu-jammy-desktop:%VER%
 
 USER root
+RUN mkdir -p /home/kasm-user/Desktop
 
 RUN wget https://downloads.1password.com/linux/debian/amd64/stable/1password-latest.deb
 RUN sudo apt install ./1password-latest.deb -y
@@ -9,6 +10,7 @@ RUN curl https://raw.githubusercontent.com/apache/flink/02d30ace69dc18555a5085ec
 RUN wget https://download.jetbrains.com/webide/PhpStorm-2023.2.3.tar.gz
 RUN sudo tar -xzf PhpStorm-2023.2.3.tar.gz -C /opt
 RUN chmod a+x /opt/PhpStorm-232.10072.32/bin/phpstorm.sh
+
 RUN echo "[Desktop Entry]" > /home/kasm-user/Desktop/PHPStorm.desktop
 RUN echo "Type=Application" >> /home/kasm-user/Desktop/PHPStorm.desktop
 RUN echo "Terminal=true" >> /home/kasm-user/Desktop/PHPStorm.desktop
