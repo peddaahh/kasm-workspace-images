@@ -32,6 +32,9 @@ RUN service procps restart
 RUN wget https://downloads.1password.com/linux/debian/amd64/stable/1password-latest.deb
 RUN sudo apt install ./1password-latest.deb -y
 
+RUN wget https://downloads.realvnc.com/download/file/viewer.files/VNC-Viewer-7.8.0-Linux-x64.deb
+RUN sudo apt install ./VNC-Viewer-7.8.0-Linux-x64.deb -y
+
 RUN curl https://raw.githubusercontent.com/apache/flink/02d30ace69dc18555a5085eccf70ee884e73a16e/tools/azure-pipelines/free_disk_space.sh | bash
 RUN wget https://download.jetbrains.com/webide/PhpStorm-2023.2.3.tar.gz
 RUN sudo tar -xzf PhpStorm-2023.2.3.tar.gz -C /opt
