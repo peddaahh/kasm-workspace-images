@@ -11,17 +11,17 @@ ENV RUSTUP_HOME=/usr/local/rustup \
     PATH=/usr/local/cargo/bin:$PATH
 
 # install rust
-RUN set -eux; \
-    \
-    url="https://sh.rustup.rs"; \
-    wget "$url" -O rustup-init; \
-    chmod +x rustup-init; \
-    ./rustup-init -y --no-modify-path; \
-    rm rustup-init; \
-    chmod -R a+w $RUSTUP_HOME $CARGO_HOME; \
-    rustup --version; \
-    cargo --version; \
-    rustc --version;
+#RUN set -eux; \
+#    \
+#    url="https://sh.rustup.rs"; \
+#    wget "$url" -O rustup-init; \
+#    chmod +x rustup-init; \
+#    ./rustup-init -y --no-modify-path; \
+#    rm rustup-init; \
+#    chmod -R a+w $RUSTUP_HOME $CARGO_HOME; \
+#    rustup --version; \
+#    cargo --version; \
+#    rustc --version;
 
 USER 1000
 # install ZSH
