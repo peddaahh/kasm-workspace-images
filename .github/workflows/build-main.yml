@@ -26,7 +26,7 @@ jobs:
     needs: list-files
     strategy:
       matrix:
-        version: ['1.14.0']
+        version: ['1.15.0']
         paths: ${{ fromJson(needs.list-files.outputs.paths) }}
     runs-on: ubuntu-latest
     steps:
