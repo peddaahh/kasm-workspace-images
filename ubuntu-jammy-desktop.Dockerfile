@@ -35,3 +35,4 @@ USER 1000
 # install ZSH
 RUN sh -c "$(curl -fsSL https://thmr.at/setup/zsh)"
 RUN sudo usermod -s /bin/zsh kasm-user
+WORKDIR /home/kasm-user
