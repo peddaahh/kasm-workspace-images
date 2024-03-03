@@ -1,4 +1,5 @@
 FROM docker.io/kasmweb/ubuntu-jammy-desktop:%VER%-rolling
+ARG TARGETARCH
 
 USER root
 
