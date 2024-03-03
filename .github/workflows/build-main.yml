@@ -34,9 +34,9 @@ jobs:
         with:
           fetch-depth: 0
       - name: Free disk space
-        run: ./tools/cleanup.sh
+        run: ./scripts/cleanup.sh
       - name: Check disk space
-        run: ./tools/check-space.sh
+        run: ./scripts/check-space.sh
       - name: get image info
         run: |
           echo "IMAGENAME=${{ matrix.paths }}" | sed 's/\.\///g' | sed 's/\.[^.]*$//' >>${GITHUB_ENV}
