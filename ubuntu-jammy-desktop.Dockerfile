@@ -2,9 +2,6 @@ FROM docker.io/kasmweb/ubuntu-jammy-desktop:%VER%-rolling
 
 USER root
 
-# free up space
-RUN curl https://raw.githubusercontent.com/apache/flink/02d30ace69dc18555a5085eccf70ee884e73a16e/tools/azure-pipelines/free_disk_space.sh | bash
-
 RUN apt update && apt install -y sudo curl jq wget build-essential python3 python3-pip wireguard openresolv jq libfuse2 libxi6 libxrender1 libxtst6 mesa-utils libfontconfig libgtk-3-bin
 RUN echo "#1000 ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 
