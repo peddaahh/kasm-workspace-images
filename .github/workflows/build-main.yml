@@ -36,7 +36,7 @@ jobs:
       - name: Free disk space
         run: chmod +x ./scripts/cleanup.sh && ./scripts/cleanup.sh
       - name: Check disk space
-        run: chmod +x ./scripts/cleanup.sh && ./scripts/check-space.sh
+        run: chmod +x ./scripts/check-space.sh && ./scripts/check-space.sh
       - name: get image info
         run: |
           echo "IMAGENAME=${{ matrix.paths }}" | sed 's/\.\///g' | sed 's/\.[^.]*$//' >>${GITHUB_ENV}
