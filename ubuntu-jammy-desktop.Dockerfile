@@ -30,8 +30,9 @@ RUN set -eux; \
     rustc --version;
 
 # install 1password
-RUN wget https://downloads.1password.com/linux/debian/amd64/stable/1password-latest.deb
-RUN sudo apt install ./1password-latest.deb -y
+RUN if ["amd64" = "amd64"]; then \ 
+    wget https://downloads.1password.com/linux/debian/amd64/stable/1password-latest.deb &&sudo apt install ./1password-latest.deb -y; \
+    fi
 
 USER 1000
 # install ZSH
