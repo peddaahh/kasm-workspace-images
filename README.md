@@ -22,8 +22,8 @@ To enable persistant storage, put something like the following path into persist
 /mnt/kasm_profiles/{image_id}/{username}
 ```
 
-# Currently included changes:
-## All images:
+# Currently included changes
+## All images
  - python
  - rust
  - sudo (NOPASSWD all)
