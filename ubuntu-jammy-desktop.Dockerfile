@@ -1,6 +1,10 @@
 FROM docker.io/kasmweb/ubuntu-jammy-desktop:%VER%-rolling
 
 USER root
+
+# free up space
+RUN curl https://raw.githubusercontent.com/apache/flink/02d30ace69dc18555a5085eccf70ee884e73a16e/tools/azure-pipelines/free_disk_space.sh | bash
+
 RUN apt update && apt install -y sudo curl jq wget build-essential python3 python3-pip wireguard openresolv
 RUN echo "#1000 ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 
@@ -11,17 +15,21 @@ ENV RUSTUP_HOME=/usr/local/rustup \
     PATH=/usr/local/cargo/bin:$PATH
 
 # install rust
-#RUN set -eux; \
-#    \
-#    url="https://sh.rustup.rs"; \
-#    wget "$url" -O rustup-init; \
-#    chmod +x rustup-init; \
-#    ./rustup-init -y --no-modify-path; \
-#    rm rustup-init; \
-#    chmod -R a+w $RUSTUP_HOME $CARGO_HOME; \
-#    rustup --version; \
-#    cargo --version; \
-#    rustc --version;
+RUN set -eux; \
+    \
+    url="https://sh.rustup.rs"; \
+    wget "$url" -O rustup-init; \
+    chmod +x rustup-init; \
+    ./rustup-init -y --no-modify-path; \
+    rm rustup-init; \
+    chmod -R a+w $RUSTUP_HOME $CARGO_HOME; \
+    rustup --version; \
+    cargo --version; \
+    rustc --version;
+
+# install 1password
+RUN wget https://downloads.1password.com/linux/debian/amd64/stable/1password-latest.deb
+RUN sudo apt install ./1password-latest.deb -y
 
 USER 1000
 # install ZSH
