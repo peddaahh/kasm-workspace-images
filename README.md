@@ -23,9 +23,12 @@ To enable persistant storage, put something like the following path into persist
 ```
 
 # Currently included changes:
+## All images:
  - python
  - rust
  - sudo (NOPASSWD all)
  - zsh (oh-my-zsh)
+
+## Ubuntu
  - Wireguard
  - 1password (amd64 & Ubuntu only)
