@@ -29,17 +29,14 @@ jobs:
         paths: ${{ fromJson(needs.list-files.outputs.paths) }}
     runs-on: ubuntu-latest
     steps:
-      - name: Free disk space
-        run: ./tools/cleanup.sh
-      - name: Check disk space
-        run: |
-          sudo dpkg-query -Wf '${Installed-Size}\t${Package}\n' | sort -nr | head
-          df . -h
-          sudo du /usr/ -hx -d 4 --threshold=1G | sort -hr | head
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Free disk space
+        run: ./tools/cleanup.sh
+      - name: Check disk space
+        run: ./tools/check-space.sh
       - name: get image info
         run: |
           echo "IMAGENAME=${{ matrix.paths }}" | sed 's/\.\///g' | sed 's/\.[^.]*$//' >>${GITHUB_ENV}
