@@ -17,7 +17,7 @@ If you want to use Wireguard, you have to add the following to Docker Run Config
 }
 ```
 
-To enable persistant storage, put something like the following path into persistant storeage path:
+To enable persistant storage, put something like the following path into persistant storage path:
 ```
 /mnt/kasm_profiles/{image_id}/{username}
 ```
