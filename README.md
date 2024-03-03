@@ -31,4 +31,4 @@ To enable persistant storage, put something like the following path into persist
 
 ## Ubuntu
  - Wireguard
- - 1password (amd64 & Ubuntu only)
+ - 1password (amd64 only)
