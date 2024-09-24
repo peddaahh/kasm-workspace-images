@@ -1,4 +1,4 @@
-FROM docker.io/kasmweb/vs-code:%VER%-rolling
+FROM docker.io/kasmweb/vs-code:%VER%-rolling-weekly
 
 USER root
 RUN apt update && apt install -y sudo curl jq wget build-essential python3 python3-pip

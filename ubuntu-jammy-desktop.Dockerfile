@@ -1,4 +1,4 @@
-FROM docker.io/kasmweb/ubuntu-jammy-desktop:%VER%-rolling
+FROM docker.io/kasmweb/ubuntu-jammy-desktop:%VER%-rolling-weekly
 ARG TARGETARCH
 
 USER root
