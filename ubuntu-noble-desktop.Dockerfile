@@ -4,7 +4,7 @@ ARG TARGETARCH
 USER root
 
 RUN echo "resolvconf resolvconf/linkify-resolvconf boolean false" | debconf-set-selections
-RUN apt update && apt install -y sudo curl jq wget build-essential python3 python3-pip wireguard resolvconf jq libfuse2 libxi6 libxrender1 libxtst6 mesa-utils libfontconfig libgtk-3-bin
+RUN apt update && apt install -y sudo curl jq wget build-essential python3 python3-pip jq wireguard wireguard-tools resolvconf jq libfuse2 libxi6 libxrender1 libxtst6 mesa-utils libfontconfig libgtk-3-bin
 RUN echo "#1000 ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 
@@ -33,6 +33,7 @@ RUN if [ "$TARGETARCH" = "amd64" ]; then \
     wget https://downloads.1password.com/linux/debian/amd64/stable/1password-latest.deb && sudo apt install ./1password-latest.deb -y; \
     fi
 
+RUN sed -i '/cmd sysctl -q/d' $(which wg-quick)
 USER 1000
 # install ZSH
 RUN sh -c "$(curl -fsSL https://thmr.at/setup/zsh)"
