@@ -3,6 +3,7 @@ ARG TARGETARCH
 
 USER root
 
+RUN echo "resolvconf resolvconf/linkify-resolvconf boolean false" | debconf-set-selections
 RUN apt update && apt install -y sudo curl jq wget build-essential python3 python3-pip wireguard resolvconf jq libfuse2 libxi6 libxrender1 libxtst6 mesa-utils libfontconfig libgtk-3-bin
 RUN echo "#1000 ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 
