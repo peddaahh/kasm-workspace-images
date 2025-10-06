@@ -28,7 +28,7 @@ jobs:
     needs: list-files
     strategy:
       matrix:
-        version: ['1.15.0']
+        version: ['1.16.0', '1.17.0']
         paths: ${{ fromJson(needs.list-files.outputs.paths) }}
     runs-on: ubuntu-latest
     steps:
@@ -68,16 +68,13 @@ jobs:
           df . -h
           sudo du /usr/ -hx -d 4 --threshold=1G | sort -hr | head
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
-      - name: Check working space directory
-        run: du ${GITHUB_WORKSPACE} -h -d 1
-      - name: Get more space
-        run: |
-          df . -h
-          sudo rm -rf ${GITHUB_WORKSPACE}/.git
-          df . -h
+      - name: Free disk space
+        run: chmod +x ./scripts/cleanup.sh && ./scripts/cleanup.sh
+      - name: Check disk space
+        run: chmod +x ./scripts/check-space.sh && ./scripts/check-space.sh
       - name: get image info
         run: |
           echo "IMAGENAME=${{ matrix.paths }}" | sed 's/\.\///g' | sed 's/\.[^.]*$//' >>${GITHUB_ENV}
@@ -90,7 +87,7 @@ jobs:
       - name: Log in to registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
       - name: Build and push
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           file: ${{ matrix.paths }}

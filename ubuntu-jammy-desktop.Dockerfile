@@ -1,13 +1,13 @@
-FROM docker.io/kasmweb/ubuntu-jammy-desktop:%VER%
+FROM docker.io/kasmweb/ubuntu-jammy-desktop:%VER%-rolling-weekly
+ARG TARGETARCH
 
 USER root
-RUN sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg && echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
-RUN sudo wget -qO - https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo apt-key add - && sudo echo "deb http://deb.anydesk.com/ all main" > /etc/apt/sources.list.d/anydesk-stable.list
 
-RUN apt update && curl https://raw.githubusercontent.com/apache/flink/02d30ace69dc18555a5085eccf70ee884e73a16e/tools/azure-pipelines/free_disk_space.sh | bash && apt install -y sudo curl jq wget build-essential python3 python3-pip wireguard openresolv brave-browser anydesk libfuse2 libxi6 libxrender1 libxtst6 mesa-utils libfontconfig libgtk-3-bin php8.1 php8.1-cli php8.1-common php8.1-mysql php8.1-zip php8.1-gd php8.1-mbstring php8.1-curl php8.1-xml php8.1-bcmath php8.1-sqlite3
-COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+RUN apt update && apt install -y sudo curl jq wget build-essential python3 python3-pip wireguard openresolv jq libfuse2 libxi6 libxrender1 libxtst6 mesa-utils libfontconfig libgtk-3-bin
 RUN echo "#1000 ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 
+
+WORKDIR /tmp
 # https://hub.docker.com/r/rustlang/rust/dockerfile
 ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
@@ -64,3 +64,4 @@ USER 1000
 # install ZSH
 RUN sh -c "$(curl -fsSL https://thmr.at/setup/zsh)"
 RUN sudo usermod -s /bin/zsh kasm-user
+WORKDIR /home/kasm-user
